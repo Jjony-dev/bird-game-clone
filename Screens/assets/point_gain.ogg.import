@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/point_gain.ogg-57aa70bcbae6c2f5e1e76e251614685b.oggstr"
+
+[deps]
+
+source_file="res://Screens/assets/point_gain.ogg"
+dest_files=[ "res://.import/point_gain.ogg-57aa70bcbae6c2f5e1e76e251614685b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

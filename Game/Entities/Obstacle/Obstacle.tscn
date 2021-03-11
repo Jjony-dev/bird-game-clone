@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game/Entities/Obstacle/Obstacle.gd" type="Script" id=1]
+[ext_resource path="res://Game/Entities/Obstacle/assets/brickRed04.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 60, 200 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1, 120 )
+
+[node name="Obstacle" type="Node2D"]
+position = Vector2( 422, 320 )
+script = ExtResource( 1 )
+velocity_scroll = -80.0
+range_offset_y = 120.0
+
+[node name="PositionOffset" type="Position2D" parent="."]
+__meta__ = {
+"_gizmo_extents_": 39.1
+}
+
+[node name="Above" type="KinematicBody2D" parent="PositionOffset"]
+position = Vector2( 0, -320 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PositionOffset/Above"]
+margin_left = -60.0
+margin_top = -205.0
+margin_right = 60.0
+margin_bottom = 202.0
+texture = ExtResource( 2 )
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PositionOffset/Above"]
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="PositionOffset"]
+position = Vector2( 58, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PositionOffset/Area2D"]
+shape = SubResource( 2 )
+
+[node name="Under" type="KinematicBody2D" parent="PositionOffset"]
+position = Vector2( 0, 320 )
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="PositionOffset/Under"]
+margin_left = -60.0
+margin_top = -206.0
+margin_right = 60.0
+margin_bottom = 202.0
+texture = ExtResource( 2 )
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PositionOffset/Under"]
+shape = SubResource( 1 )
+[connection signal="area_exited" from="PositionOffset/Area2D" to="." method="_on_Area2D_area_exited"]

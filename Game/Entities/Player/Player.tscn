@@ -1,0 +1,67 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Game/Entities/Player/assets/wingMan5.png" type="Texture" id=1]
+[ext_resource path="res://Game/Entities/Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://Game/Entities/Player/assets/wingMan3.png" type="Texture" id=3]
+[ext_resource path="res://Game/Entities/Player/assets/wingMan2.png" type="Texture" id=4]
+[ext_resource path="res://Game/Entities/Player/assets/wingMan4.png" type="Texture" id=5]
+[ext_resource path="res://Game/Entities/Player/assets/wingMan1.png" type="Texture" id=6]
+[ext_resource path="res://Game/Entities/Player/assets/jump.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Game/Entities/Player/assets/wingManHit.png" type="Texture" id=8]
+[ext_resource path="res://Game/Entities/Player/assets/creature5.ogg" type="AudioStream" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "Hit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 1 ) ],
+"loop": false,
+"name": "Jump",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "Wait",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "Fall",
+"speed": 30.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 32.0
+
+[node name="Player" type="Node2D"]
+position = Vector2( 90, 360 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_vertical_guides_": [ 90.475 ]
+}
+
+[node name="BodyHitbox" type="Area2D" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="BodyHitbox"]
+pause_mode = 2
+scale = Vector2( 0.7, 0.7 )
+frames = SubResource( 1 )
+animation = "Wait"
+frame = 1
+
+[node name="CollisionShape" type="CollisionShape2D" parent="BodyHitbox"]
+shape = SubResource( 2 )
+
+[node name="Sounds" type="Node" parent="."]
+pause_mode = 2
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 9 )
+pitch_scale = 1.5
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 7 )
+[connection signal="body_entered" from="BodyHitbox" to="." method="_on_BodyHitbox_body_entered"]
