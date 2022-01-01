@@ -8,7 +8,7 @@ A simple example of endless game
 
 ## Credits
 
-This example contains images and soudns from [Kenney](https://www.kenney.nl/)
+This example contains images and sounds from [Kenney](https://www.kenney.nl/)
 
 ## License
 
